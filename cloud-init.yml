@@ -1,0 +1,24 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages: [python-pip, python-netaddr]
+write_files:
+-   content: |
+        localhost bootstrap_os=ubuntu ansible_connection=local
+        [kube-master]
+        localhost
+
+        [etcd]
+        localhost
+
+        [kube-node]
+        localhost
+
+        [k8s-cluster:children]
+        kube-node
+        kube-master
+    path: /root/hosts.ini
+runcmd:
+ - pip install ansible
+ - git clone https://github.com/kubernetes-incubator/kubespray.git /root/kubespray
+ - ansible-playbook --user ubuntu --become --become-user=root -i /root/hosts.ini /root/kubespray/cluster.yml
