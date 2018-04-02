@@ -4,7 +4,7 @@ package_upgrade: true
 packages: [python-pip, python-netaddr]
 write_files:
 -   content: |
-        localhost bootstrap_os=ubuntu ansible_connection=local
+        localhost bootstrap_os=ubuntu ansible_connection=local ansible_user=ubuntu ansible_become_user=root
         [kube-master]
         localhost
 
@@ -21,4 +21,4 @@ write_files:
 runcmd:
  - pip install ansible
  - git clone https://github.com/kubernetes-incubator/kubespray.git /root/kubespray
- - ansible-playbook --user ubuntu --become --become-user=root -i /root/hosts.ini /root/kubespray/cluster.yml
+ - ansible-playbook -i /root/hosts.ini /root/kubespray/cluster.yml

@@ -1,3 +1,7 @@
-## Kubespray All-In-One
+## Usage
 
-To deploy locally run `./install.sh` or to deploy in the cloud use `cloud-init.yml`
+```
+git clone https://github.com/RootPi314/kubespray-aio.git
+cd kubespray-aio
+vagrant up
+```
