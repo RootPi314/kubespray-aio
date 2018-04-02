@@ -21,4 +21,5 @@ write_files:
 runcmd:
  - pip install ansible
  - git clone https://github.com/kubernetes-incubator/kubespray.git /root/kubespray
+ - cd /root/kubespray && git checkout v2.4.0
  - ansible-playbook -i /root/hosts.ini /root/kubespray/cluster.yml
